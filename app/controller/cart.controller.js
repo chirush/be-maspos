@@ -63,11 +63,10 @@ const update = async (req, res) => {
 
   	const sub_total = price*quantity;
 
-	await cart.$query().patch({
-      	quantity: req.body.quantity,
-      	sub_total: sub_total,
-	});
-
+  	await cart.$query().patch({
+        	quantity: req.body.quantity,
+        	sub_total: sub_total,
+  	});
 
       res.status(200).json({
         status: 200,
@@ -85,6 +84,46 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
   try {
     const cart = await Cart.query().deleteById(req.params.id);
+
+    res.status(200).json({
+      status: 200,
+      message: "OK",
+      data: cart,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Internal Server Error!",
+    });
+  }
+};
+
+const transaction = async (req, res) => {
+  try {
+    const userid = req.user.id;
+    const cart_item = await Cart.query().where('user_id', userid).select('product_id', 'quantity', 'sub_total');
+    const cart_data = [];
+
+    let total = 0;
+
+    cart_item.forEach((item) => {
+      cart_data.push({
+        product_id: item.product_id,
+        quantity: item.quantity,
+        sub_total: item.sub_total,
+      });
+
+      total += item.sub_total;
+    });
+
+    console.log(cart_data);
+
+    const cart = await Cart.query().insert({
+      user_id: userid,
+      product_id: req.body.product_id,
+      quantity: req.body.quantity,
+      sub_total: sub_total,
+    });
 
     res.status(200).json({
       status: 200,
