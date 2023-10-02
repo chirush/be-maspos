@@ -38,6 +38,8 @@ router.get("/product/:category_id", AuthMiddleware, ProductController.index);
  *     tags:
  *     - Product
  *     summary: Add Product
+ *     security:
+ *       - bearerAuth: []
  *     consumes:
  *       - multipart/form-data
  *     requestBody:
@@ -70,7 +72,7 @@ router.get("/product/:category_id", AuthMiddleware, ProductController.index);
  *      500:
  *        description: Server Error
  */
-router.post("/product", upload.single('image'), ProductValidator.store, ProductController.store);
+router.post("/product", upload.single('image'), ProductValidator.store, AuthMiddleware, ProductController.store);
 
 /**
  * @openapi
@@ -113,7 +115,7 @@ router.post("/product", upload.single('image'), ProductValidator.store, ProductC
  *      500:
  *        description: Server Error
  */
-router.put("/product/:id", AuthMiddleware, ProductController.update);
+router.put("/product/:id", upload.single('image'), AuthMiddleware, ProductController.update);
 
 /**
  * @openapi

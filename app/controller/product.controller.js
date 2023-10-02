@@ -46,8 +46,9 @@ const update = async (req, res) => {
       .findById(req.params.id)
       .patch({
         name: req.body.name,
-        category_id: req.body.category_id,
+        category_id: parseInt(req.body.category_id),
         price: req.body.price,
+        image: req.file.filename,
       });
 
       res.status(200).json({
