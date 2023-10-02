@@ -40,12 +40,10 @@ router.get("/product/:category_id", AuthMiddleware, ProductController.index);
  *     summary: Add Product
  *     security:
  *       - bearerAuth: []
- *     consumes:
- *       - multipart/form-data
  *     requestBody:
  *      required: true
  *      content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *            type: object
  *            required:
@@ -74,6 +72,7 @@ router.get("/product/:category_id", AuthMiddleware, ProductController.index);
  */
 router.post("/product", upload.single('image'), ProductValidator.store, AuthMiddleware, ProductController.store);
 
+
 /**
  * @openapi
  * /product/{id}:
@@ -91,13 +90,14 @@ router.post("/product", upload.single('image'), ProductValidator.store, AuthMidd
  *     requestBody:
  *      required: true
  *      content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *            type: object
  *            required:
  *              - name
  *              - category_id
  *              - price
+ *              - image
  *            properties:
  *              name:
  *               type: string
@@ -105,6 +105,8 @@ router.post("/product", upload.single('image'), ProductValidator.store, AuthMidd
  *               type: integer
  *              price:
  *               type: string
+ *              image:
+ *               type: file
  *     responses:
  *      200:
  *        description: Success
