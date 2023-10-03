@@ -1,5 +1,4 @@
 const Cart = require("../model/cart.model");
-const Product = require("../model/product.model");
 const Transaction = require("../model/transaction.model");
 const DetailTransaction = require("../model/detail_transaction.model");
 

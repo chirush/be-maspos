@@ -6,10 +6,17 @@ const index = async (req, res) => {
     const userid = req.user.id;
     const carts = await Cart.query().where('user_id', userid);
 
+    let total = 0;
+
+    carts.forEach((item) => {
+      total += parseInt(item.sub_total);
+    });
+
     res.status(200).json({
       status: 200,
       message: "OK",
       data: carts,
+      total: total,
     });
   } catch (error) {
     console.error(error);
