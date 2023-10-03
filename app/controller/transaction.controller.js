@@ -55,14 +55,12 @@ const store = async (req, res) => {
 			sub_total: item.sub_total,
 		});
       
-    	total += parseInt(item.sub_total);
+    	total += item.sub_total;
     });
-
-    total_string = String(total);
 
     const transaction = await Transaction.query().insert({
 		user_id: userid,
-		total: total_string,
+		total: total,
     });
 
     const transaction_id = transaction.id;

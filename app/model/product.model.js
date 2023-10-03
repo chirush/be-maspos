@@ -23,7 +23,7 @@ class Product extends Model {
           type: "integer",
         },
         price: {
-          type: "string",
+          type: "integer",
         },
         image: {
           type: "string",

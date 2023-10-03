@@ -26,7 +26,7 @@ class DetailTransaction extends Model {
           type: "integer",
         },
         sub_total: {
-          type: "string",
+          type: "integer",
         },
       },
     };

@@ -4,7 +4,7 @@ exports.up = function (knex) {
     table.integer("user_id").index().unsigned();
     table.integer("product_id").index().unsigned();
     table.integer("quantity");
-    table.string("sub_total");
+    table.integer("sub_total");
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.timestamp("updated_at").defaultTo(knex.fn.now());
     table.timestamp("deleted_at").nullable();

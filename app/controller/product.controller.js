@@ -23,7 +23,7 @@ const store = async (req, res) => {
     const product = await Product.query().insert({
       name: req.body.name,
       category_id: parseInt(req.body.category_id),
-      price: req.body.price,
+      price: parseInt(req.body.price),
       image: req.file.filename,
     });
 
@@ -47,7 +47,7 @@ const update = async (req, res) => {
       .patch({
         name: req.body.name,
         category_id: parseInt(req.body.category_id),
-        price: req.body.price,
+        price: parseInt(req.body.price),
         image: req.file.filename,
       });
 

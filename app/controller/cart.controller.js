@@ -9,7 +9,7 @@ const index = async (req, res) => {
     let total = 0;
 
     carts.forEach((item) => {
-      total += parseInt(item.sub_total);
+      total += item.sub_total;
     });
 
     res.status(200).json({

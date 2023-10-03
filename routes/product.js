@@ -57,7 +57,7 @@ router.get("/product/:category_id", AuthMiddleware, ProductController.index);
  *              category_id:
  *               type: integer
  *              price:
- *               type: string
+ *               type: integer
  *              image:
  *               type: file
  *     responses:
@@ -104,7 +104,7 @@ router.post("/product", upload.single('image'), ProductValidator.store, AuthMidd
  *              category_id:
  *               type: integer
  *              price:
- *               type: string
+ *               type: integer
  *              image:
  *               type: file
  *     responses:

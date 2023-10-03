@@ -20,7 +20,7 @@ class Transaction extends Model {
           type: "integer",
         },
         total: {
-          type: "string",
+          type: "integer",
         },
       },
     };

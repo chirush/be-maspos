@@ -3,7 +3,7 @@ exports.up = function (knex) {
     table.increments("id").primary().unsigned();
     table.integer("category_id").index().unsigned();
     table.string("name");
-    table.string("price");
+    table.integer("price");
     table.string("image");
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.timestamp("updated_at").defaultTo(knex.fn.now());
