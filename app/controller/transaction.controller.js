@@ -1,4 +1,5 @@
 const Cart = require("../model/cart.model");
+const Product = require("../model/product.model");
 const Transaction = require("../model/transaction.model");
 const DetailTransaction = require("../model/detail_transaction.model");
 
@@ -23,7 +24,8 @@ const index = async (req, res) => {
 const detail = async (req, res) => {
   try {
     const transaction_id = req.params.id;
-    const detail_transactions = await DetailTransaction.query().where('transaction_id', transaction_id);
+    const detail_transactions = await DetailTransaction.query().where('transaction_id', transaction_id)
+    .join('product', 'product.id', '=', 'detail_transaction.product_id').select('detail_transaction.*', 'product.*');
 
     res.status(200).json({
       status: 200,
@@ -66,13 +68,13 @@ const store = async (req, res) => {
 
     const transaction_id = transaction.id;
 
-	for (const item of cart_data) {
-		await DetailTransaction.query().insert({
-			transaction_id: transaction_id,
-			product_id: item.product_id,
-			quantity: item.quantity,
-			sub_total: item.sub_total,
-		});
+  	for (const item of cart_data) {
+  		await DetailTransaction.query().insert({
+  			transaction_id: transaction_id,
+  			product_id: item.product_id,
+  			quantity: item.quantity,
+  			sub_total: item.sub_total,
+  	});
 
 		await Cart.query().deleteById(item.id);
 	}
