@@ -26,7 +26,7 @@ This will allow us to use `knex` as a command line tool that helps you create an
 
 #### Multer for File Upload Handle
 
-> npm install express multer
+Just dont forget to create folder named "uploads".
 
 ## Installation
 
