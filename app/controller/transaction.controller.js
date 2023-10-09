@@ -24,12 +24,19 @@ const detail = async (req, res) => {
   try {
     const transaction_id = req.params.id;
     const detail_transactions = await DetailTransaction.query().where('transaction_id', transaction_id)
-    .join('product', 'product.id', '=', 'detail_transaction.product_id').select('detail_transaction.*', 'product.*');
+    .join('product', 'product.id', '=', 'detail_transaction.product_id').select('detail_transaction.id', 'detail_transaction.transaction_id', 'detail_transaction.product_id', 'product.name', 'product.price', 'product.image', 'detail_transaction.quantity', 'detail_transaction.sub_total', 'detail_transaction.created_at');
+
+    let total = 0;
+
+    detail_transactions.forEach((item) => {
+      total += item.sub_total;
+    });
 
     res.status(200).json({
       status: 200,
       message: "OK",
       data: detail_transactions,
+      total: total,
     });
   } catch (error) {
     console.error(error);
