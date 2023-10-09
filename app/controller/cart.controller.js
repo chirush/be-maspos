@@ -4,7 +4,7 @@ const Product = require("../model/product.model");
 const index = async (req, res) => {
   try {
     const userid = req.user.id;
-    const carts = await Cart.query().where('user_id', userid);
+    const carts = await Cart.query().where('user_id', userid).join('product', 'product.id', '=', 'cart.product_id').select('cart.id', 'cart.user_id', 'cart.product_id', 'product.name', 'product.price', 'product.image', 'cart.quantity', 'cart.sub_total', 'cart.created_at');
 
     let total = 0;
 
