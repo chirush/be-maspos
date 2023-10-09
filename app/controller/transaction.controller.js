@@ -65,28 +65,34 @@ const store = async (req, res) => {
     	total += item.sub_total;
     });
 
-    const transaction = await Transaction.query().insert({
-		user_id: userid,
-		total: total,
-    });
+    if(total == 0){
+      return res.status(400).json({
+        message: "Theres nothing on the Cart!",
+      });
+    }else{
+      const transaction = await Transaction.query().insert({
+  		user_id: userid,
+  		total: total,
+      });
 
-    const transaction_id = transaction.id;
+      const transaction_id = transaction.id;
 
-  	for (const item of cart_data) {
-  		await DetailTransaction.query().insert({
-  			transaction_id: transaction_id,
-  			product_id: item.product_id,
-  			quantity: item.quantity,
-  			sub_total: item.sub_total,
-  	});
+    	for (const item of cart_data) {
+    		await DetailTransaction.query().insert({
+    			transaction_id: transaction_id,
+    			product_id: item.product_id,
+    			quantity: item.quantity,
+    			sub_total: item.sub_total,
+    	});
 
-		await Cart.query().deleteById(item.id);
-	}
+  		await Cart.query().deleteById(item.id);
+  	  }
 
-    res.status(200).json({
-      status: 200,
-      message: "OK",
-    });
+      res.status(200).json({
+        status: 200,
+        message: "OK",
+      });
+    }
   } catch (error) {
     console.error(error);
     return res.status(500).json({
