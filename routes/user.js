@@ -154,4 +154,23 @@ router.put("/user/:id", AuthMiddleware, UserValidator.update, UserController.upd
  */
 router.delete("/user/:id", AuthMiddleware, UserController.destroy);
 
+/**
+ * @openapi
+ * /user:
+ *  get:
+ *     tags:
+ *     - User
+ *     summary: Get detail user
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *      200:
+ *        description: Success
+ *      404:
+ *        description: Not Found
+ *      500:
+ *        description: Server Error
+ */
+router.get("/user/detail", AuthMiddleware, UserController.detail);
+
 module.exports = router;

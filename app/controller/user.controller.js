@@ -104,10 +104,29 @@ const destroy = async (req, res) => {
   }
 };
 
+const detail = async (req, res) => {
+  try {
+    const userid = req.user.id;
+    const users = await User.query().where('user_id', '=', userid);
+
+    res.status(200).json({
+      status: 200,
+      message: "OK!",
+      data: users,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Internal Server Error!",
+    });
+  }
+};
+
 module.exports = {
   index,
   store,
   show,
   update,
   destroy,
+  detail,
 };
