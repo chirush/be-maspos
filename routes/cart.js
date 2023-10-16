@@ -42,11 +42,8 @@ router.get("/cart", AuthMiddleware, CartController.index);
  *            type: object
  *            required:
  *              - product_id
- *              - quantity
  *            properties:
  *              product_id:
- *               type: integer
- *              quantity:
  *               type: integer
  *     responses:
  *      200:

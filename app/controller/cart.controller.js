@@ -30,7 +30,7 @@ const store = async (req, res) => {
   try {
     const userid = req.user.id;
   	const product_id = req.body.product_id;
-  	const quantity = req.body.quantity;
+  	const quantity = 1;
 
   	const product = await Product.query().where('id', product_id).first();
   	const price = product.price;
