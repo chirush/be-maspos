@@ -37,10 +37,27 @@ const store = async (req, res) => {
 
   	const sub_total = price*quantity;
 
+    let cartCheck = await Cart.query().where("product_id", req.body.product_id).first();
+    if (cartCheck){
+      const sub_total = price*(cartCheck.quantity+1);
+
+      const cartUpdate = await Cart.query()
+        .findById(cartCheck.id)
+        .patch({
+          quantity: cartCheck.quantity+1,
+          sub_total: sub_total,
+        });
+
+      return res.status(200).json({
+        status: 200,
+        message: "Cart has been updated!",
+      });
+    }
+
     const cart = await Cart.query().insert({
       user_id: userid,
       product_id: req.body.product_id,
-      quantity: req.body.quantity,
+      quantity: 1,
       sub_total: sub_total,
     });
 
