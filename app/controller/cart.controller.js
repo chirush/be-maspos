@@ -43,16 +43,24 @@ const store = async (req, res) => {
       const counter = req.body.counter;
       if (counter == "inc"){
         const quantity = cartCheck.quantity+1;
+
+        const cartUpdate = await Cart.query()
+          .findById(cartCheck.id)
+          .patch({
+            quantity: quantity,
+            sub_total: sub_total,
+          });
       }else{
         const quantity = cartCheck.quantity-1;
+        
+        const cartUpdate = await Cart.query()
+          .findById(cartCheck.id)
+          .patch({
+            quantity: quantity,
+            sub_total: sub_total,
+          });
       }
 
-      const cartUpdate = await Cart.query()
-        .findById(cartCheck.id)
-        .patch({
-          quantity: quantity,
-          sub_total: sub_total,
-        });
 
       return res.status(200).json({
         status: 200,
