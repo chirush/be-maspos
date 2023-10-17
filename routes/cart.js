@@ -59,18 +59,13 @@ router.post("/cart", AuthMiddleware, CartValidator.store, CartController.store);
 
 /**
  * @openapi
- * /cart/{id}:
+ * /cart:
  *  put:
  *     tags:
  *     - Cart
  *     summary: Update Cart
  *     security:
  *	     - bearerAuth: []
- *     parameters:
- *     - name: id
- *       in: path
- *       description: The unique id of the Cart
- *       required: true
  *     requestBody:
  *      required: true
  *      content:
@@ -78,10 +73,13 @@ router.post("/cart", AuthMiddleware, CartValidator.store, CartController.store);
  *           schema:
  *            type: object
  *            required:
- *              - quantity
+ *              - product_id
+ *              - counter
  *            properties:
- *              quantity:
+ *              product_id:
  *               type: integer
+ *              counter:
+ *               type: string
  *     responses:
  *      200:
  *        description: Success
@@ -92,7 +90,7 @@ router.post("/cart", AuthMiddleware, CartValidator.store, CartController.store);
  *      500:
  *        description: Server Error
  */
-router.put("/cart/:id", AuthMiddleware, CartController.update);
+router.put("/cart", AuthMiddleware, CartController.update);
 
 /**
  * @openapi
