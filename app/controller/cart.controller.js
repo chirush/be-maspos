@@ -77,13 +77,14 @@ const store = async (req, res) => {
 
 const update = async (req, res) => {
   try {
+    let cart = await Cart.query().where("product_id", req.body.product_id).first();
     const counter = req.body.counter;
     if (counter == "inc"){
       const quantity = cartCheck.quantity+1;
       const sub_total = price*quantity;
 
       const cartUpdate = await Cart.query()
-        .findById(req.params.id)
+        .findById(cart.id)
         .patch({
           quantity: quantity,
           sub_total: sub_total,
@@ -93,7 +94,7 @@ const update = async (req, res) => {
       const sub_total = price*quantity;
 
       const cartUpdate = await Cart.query()
-        .findById(req.params.id)
+        .findById(cart.id)
         .patch({
           quantity: quantity,
           sub_total: sub_total,
