@@ -80,7 +80,7 @@ const update = async (req, res) => {
     const product = await Product.query().where('id', req.body.product_id).first();
     let cart = await Cart.query().where("product_id", req.body.product_id).first();
     const counter = req.body.counter;
-    
+
     if (counter == "inc"){
       const quantity = cart.quantity+1;
       const sub_total = product.price*quantity;
@@ -105,7 +105,7 @@ const update = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "Cart has been updated!",
       data: cart,
     });
   } catch (error) {
