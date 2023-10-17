@@ -83,7 +83,7 @@ const update = async (req, res) => {
       const sub_total = price*quantity;
 
       const cartUpdate = await Cart.query()
-        .findById(cartCheck.id)
+        .findById(req.params.id)
         .patch({
           quantity: quantity,
           sub_total: sub_total,
@@ -93,13 +93,13 @@ const update = async (req, res) => {
       const sub_total = price*quantity;
 
       const cartUpdate = await Cart.query()
-        .findById(cartCheck.id)
+        .findById(req.params.id)
         .patch({
           quantity: quantity,
           sub_total: sub_total,
         });
     }
-    
+
     res.status(200).json({
       status: 200,
       message: "OK",
