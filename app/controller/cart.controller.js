@@ -64,7 +64,7 @@ const store = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "Product has been added to cart!",
       data: cart,
     });
   } catch (error) {
@@ -162,7 +162,7 @@ const transaction = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "Transaction success!",
       data: cart,
     });
   } catch (error) {

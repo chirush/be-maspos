@@ -29,7 +29,7 @@ const store = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "Product has been added!",
       data: product,
     });
   } catch (error) {
@@ -53,7 +53,7 @@ const update = async (req, res) => {
 
       res.status(200).json({
         status: 200,
-        message: "OK",
+        message: "Product has been updated!",
         data: product,
       });
   } catch (error) {
@@ -70,7 +70,7 @@ const destroy = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "Product has been deleted!",
       data: product,
     });
   } catch (error) {

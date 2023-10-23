@@ -25,7 +25,7 @@ const store = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "Category has been added!",
       data: category,
     });
   } catch (error) {
@@ -46,7 +46,7 @@ const update = async (req, res) => {
 
       res.status(200).json({
         status: 200,
-        message: "OK",
+        message: "Category has been updated!",
         data: category,
       });
   } catch (error) {
@@ -63,7 +63,7 @@ const destroy = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "Category has been deleted!",
       data: category,
     });
   } catch (error) {
